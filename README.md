@@ -398,15 +398,15 @@ File Parsing: Converts LLM responses into project files with `response_parser.py
 
 ### Architecture
 
-REST API Interface (app/main.py): FastAPI application exposing HTTP endpoints for project generation, compilation, and error fixing.
+REST API Interface (`app/main.py`): FastAPI application exposing HTTP endpoints for project generation, compilation, and error fixing.
 
-MCP Interface (mcp_server.py, app/mcp_service.py): Server-Sent Events interface for the same functionality.
+MCP tools (`app/mcp_tools.py`): Server-Sent Events interface for the same functionality.
 
-Vector Database (app/vector_store.py): Qdrant is used for storing and searching similar projects and error examples.
+Vector Database (`app/vector_store.py`): Qdrant is used for storing and searching similar projects and error examples.
 
-LLM Integration (app/llm_client.py): Communicates with LLM APIs (like Gaia nodes) for code generation and error fixing.
+LLM Integration (`app/llm_client.py`): Communicates with LLM APIs (like Gaia nodes) for code generation and error fixing.
 
-Compilation Pipeline (app/compiler.py): Handles Rust code compilation, error detection, and provides feedback for fixing.
+Compilation Pipeline (`app/compiler.py`): Handles Rust code compilation, error detection, and provides feedback for fixing.
 
 ### Process Flow
 
@@ -533,6 +533,7 @@ vector_store.add_item(
 ### Method 2: Adding Multiple Examples from JSON Files
 
 First, ensure you have the required dependencies:
+
 ```bash
 pip install qdrant-client openai
 ```
@@ -568,7 +569,7 @@ Format for error examples:
 Then run the data loading script:
 
 ```
-python -c "from app.load_data import load_project_examples, load_error_examples; load_project_examples(); load_error_examples()"
+python app/load_data.py
 ```
 
 #### Method 3: Using the `parse_and_save_qna.py` Script
